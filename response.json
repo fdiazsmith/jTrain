@@ -1,0 +1,115 @@
+Response:
+[{
+"serverTimestamp":1716508929102,
+"nxbs2RedirectUrl":"",
+"agency":{
+    "rev":1055,
+"id":"sfmta-cis",
+"name":"San Francisco Muni CIS",
+"shortName":"SF Muni CIS",
+"website":"http://www.sfmta.com",
+"phone":"5-1-1",
+"location":{
+    "county":"San Francisco",
+"region":"California-Northern",
+"city":"San Francisco",
+"state":"CA",
+"postal":"94103",
+"timezone":"PST8PDT"
+},
+"departingWord":"Departing",
+"arrivingWord":"Arriving",
+"usesMetric":false,
+"usesPredsCoincidentRoutes":true,
+"defaultRoute":"CA",
+"scheduleUrl":"http://www.sfmta.com",
+"nxbs2RedirectUrl":"",
+"logo":"/logos/muniLogoSmall.gif",
+"allowsSelectionByStopCode":false,
+"numberDigitsForStopCode":5,
+"smsEnabled":true,
+"phoneSystemEnabled":false,
+"smsKeyword":"nextmuni",
+"smsPrefix":"41411",
+"revTimestamp":"2024-05-20T03:30:41Z",
+"revComment":"rev activate: 1055 comment: Upload 20240519:13:41sfmta_cisG:Auto load for 20240520 through 20240607"
+},
+"route":{
+    "id":"J",
+"title":"J Church",
+"description":"5am-12 midnight daily",
+"color":"a96614",
+"textColor":"ffffff",
+"hidden":false
+},
+"stop":{
+    "id":"6215",
+"lat":37.7582299,
+"lon":-122.42779,
+"name":"Right Of Way/20th St",
+"code":"16215",
+"hidden":false,
+"showDestinationSelector":true,
+"route":"J"
+},
+"values":[
+{
+    "timestamp":1716509596313,
+"minutes":11,
+"affectedByLayover":false,
+"isDeparture":false,
+"occupancyStatus":1,
+"occupancyDescription":"Many seats available",
+"vehiclesInConsist":1,
+"linkedVehicleIds":"2001",
+"vehicleId":"2001",
+"vehicleType":"LRV_LRV",
+"direction":{
+    "id":"J_1_var1",
+"name":"Embarcadero Station",
+"destinationName":"Embarcadero Station"
+},
+"tripId":"11505022_M31",
+"delay":0,
+"predUsingNavigationTm":false,
+"departure":false
+},{
+    "timestamp":1716510248167,
+"minutes":21,
+"affectedByLayover":true,
+"isDeparture":false,
+"occupancyStatus":0,
+"occupancyDescription":"Empty",
+"vehiclesInConsist":1,
+"linkedVehicleIds":"1549",
+"vehicleId":"1549",
+"vehicleType":"LRV_LRV",
+"direction":{
+    "id":"J_1_var1",
+"name":"Embarcadero Station",
+"destinationName":"Embarcadero Station"
+},
+"tripId":"11505012_M31",
+"delay":0,
+"predUsingNavigationTm":false,
+"departure":false
+},{
+    "timestamp":1716511148167,
+"minutes":36,
+"affectedByLayover":true,
+"isDeparture":false,
+"occupancyStatus":-1,
+"occupancyDescription":"Unknown",
+"vehiclesInConsist":1,
+"linkedVehicleIds":"1524",
+"vehicleId":"1524",
+"vehicleType":"LRV_LRV",
+"direction":{
+    "id":"J_1_var1",
+"name":"Embarcadero Station",
+"destinationName":"Embarcadero Station"
+},
+"tripId":"11505021_M31",
+"delay":0,
+"predUsingNavigationTm":false,
+"departure":false}]}]
