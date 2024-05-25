@@ -11,8 +11,10 @@ int GREEN = 0;
 int WHITE = 0;
 // Create an instance of the Network class
 Network network(ssid, password);
-Display display(32, 8, RED, GREEN, WHITE);
+Display display(4, 8, 13, NEO_MATRIX_TOP + NEO_MATRIX_RIGHT + NEO_MATRIX_COLUMNS + NEO_MATRIX_PROGRESSIVE, NEO_GRB + NEO_KHZ800);
+// Display display(8, 4, 13, NEO_MATRIX_TOP + NEO_MATRIX_LEFT + NEO_MATRIX_ROWS + NEO_MATRIX_PROGRESSIVE, NEO_GRB + NEO_KHZ800);
 NextTrain nextTrain("https://webservices.umoiq.com", "/api/pub/v1/agencies/sfmta-cis/stopcodes/16215/predictions?key=0be8ebd0284ce712a63f29dcaf7798c4");
+UnixTime timeUntil;
 
 enum State {
     STATE_INIT,
@@ -29,10 +31,10 @@ State currentState = STATE_INIT;
 void setup() {
     Serial.begin(115200);
     network.connect();
-    display.log("Starting jTrain...");
+    display.log("Starting jTrain...v4");
     display.networkStatus(network.getStatus());
 }
-
+unsigned long stateChangeTime = 0;
 void loop() {
     unsigned long currentTime = millis();
      long timestamp;
@@ -48,6 +50,8 @@ void loop() {
             // Attempt to connect to WiFi
             if (network.checkConnection()) {
                 currentState = STATE_CONNECTED;
+                display.networkStatus(network.getStatus());
+                delay(3000); // Display status for 3 seconds
             } 
             // else if (currentTime - stateChangeTime >= DISPLAY_TIME) {
             //     currentState = STATE_DISCONNECTED;
@@ -83,7 +87,7 @@ void loop() {
             // stateChangeTime = currentTime;
             nextTrain.request();
             currentState = STATE_DISPLAYING;
-            delay(20000);
+            
             break;
 
         case STATE_DISPLAYING:
@@ -91,22 +95,20 @@ void loop() {
             // display.minutes(nextTrain.getTimeToNextOne());
             // if (currentTime - stateChangeTime >= FETCH_INTERVAL) {
             //     currentState = STATE_FETCHING;
+             
             // }
-            display.minutes(nextTrain.getTimeToNextOne());
-                    // Additional code to display the time components
-            timestamp = nextTrain.getTimestamp();
-
-            if (timestamp != 0) {
-                int year, month, day, hour, minute, second;
-                nextTrain.getTimestampComponents(year, month, day, hour, minute, second);
-
-                char buffer[64];
-                sprintf(buffer, "Time: %02d-%02d-%04d %02d:%02d:%02d", day, month, year, hour, minute, second);
-                display.log(buffer);
+            if (millis() - stateChangeTime >= 20000) {
+                currentState = STATE_FETCHING;
+                stateChangeTime = millis();
             }
-      
+            else{
+                currentState = STATE_DISPLAYING;
 
-            currentState = STATE_FETCHING;
+                // nextTrain.update();
+                display.minutes(nextTrain.getTimeToNextOne());
+                // delay(3000);
+            }
+       
             break;
 
         case STATE_ERROR:
