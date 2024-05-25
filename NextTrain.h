@@ -11,14 +11,16 @@ private:
     const char* server;
     String url;
     int timeToNextOne;
-    long timestamp;
-    UnixTime *unixTime;
+    int64_t timestamp;
 
 public:
+    UnixTime *unixTime;
+    UnixTime *currentTime;
     NextTrain(const char* server, String url);
     void request();
     int getTimeToNextOne();
     long getTimestamp();
+    void update();
    void getTimestampComponents(int &year, int &month, int &day, int &hour, int &minute, int &second);
 };
 
