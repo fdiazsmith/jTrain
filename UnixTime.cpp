@@ -70,7 +70,7 @@ int getDaysInMonth(int year, int month) {
     return daysInMonth[month - 1];
 }
 
-int UnixTime::getYear() const {
+int UnixTime::getYear() const{
     int64_t seconds = timestamp;
     int year = 1970;
     while (seconds >= (isLeapYear(year) ? 366 : 365) * 24 * 3600) {
@@ -80,10 +80,10 @@ int UnixTime::getYear() const {
     return year;
 }
 
-int UnixTime::getMonth() const {
+int UnixTime::getMonth() const{
     int64_t seconds = timestamp;
     int year = getYear();
-    int month = 1;
+     int month = 1;
     for (int i = 1970; i < year; i++) {
         seconds -= (isLeapYear(i) ? 366 : 365) * 24 * 3600;
     }
@@ -94,7 +94,7 @@ int UnixTime::getMonth() const {
     return month;
 }
 
-int UnixTime::getDay() const {
+int UnixTime::getDay()  const{
     int64_t seconds = timestamp;
     int year = getYear();
     int month = getMonth();
@@ -104,19 +104,23 @@ int UnixTime::getDay() const {
     for (int i = 1; i < month; i++) {
         seconds -= getDaysInMonth(year, i) * 24 * 3600;
     }
-    return seconds / (24 * 3600) + 1;
+    int day = seconds / (24 * 3600) + 1;
+    return day;
 }
 
-int UnixTime::getHour() const {
-    return (timestamp % 86400L) / 3600;
+int UnixTime::getHour()  const{
+    int  hour = (timestamp % 86400L) / 3600;
+    return hour;
 }
 
-int UnixTime::getMinute() const {
-    return (timestamp % 3600) / 60;
+int UnixTime::getMinute()  const{
+    int minute = (timestamp % 3600) / 60;
+    return minute;
 }
 
 int UnixTime::getSecond() const {
-    return timestamp % 60;
+    int second = timestamp % 60;
+    return second;
 }
 
 void UnixTime::getDateTimeComponents(int &year, int &month, int &day, int &hour, int &minute, int &second) const {

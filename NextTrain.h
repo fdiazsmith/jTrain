@@ -6,6 +6,8 @@
 #include <ArduinoJson.h>
 #include "UnixTime.h"
 
+extern UnixTime globalTimer; // Declare the global timer
+
 class NextTrain {
 private:
     const char* server;
@@ -15,7 +17,7 @@ private:
 
 public:
     UnixTime *unixTime;
-    UnixTime *currentTime;
+    
     NextTrain(const char* server, String url);
     void request();
     int getTimeToNextOne();

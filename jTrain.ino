@@ -16,6 +16,7 @@ Display display(4, 8, 13, NEO_MATRIX_TOP + NEO_MATRIX_RIGHT + NEO_MATRIX_COLUMNS
 NextTrain nextTrain("https://webservices.umoiq.com", "/api/pub/v1/agencies/sfmta-cis/stopcodes/16215/predictions?key=0be8ebd0284ce712a63f29dcaf7798c4");
 UnixTime timeUntil;
 
+
 enum State {
     STATE_INIT,
     STATE_CONNECTING,
@@ -27,7 +28,10 @@ enum State {
 };
 
 State currentState = STATE_INIT;
+unsigned long stateChangeTime = 0;
 
+// Define the global timer
+UnixTime globalTimer;
 
 void setup() {
     Serial.begin(115200);
@@ -37,7 +41,6 @@ void setup() {
     display.networkStatus(network.getStatus());
 
 }
-unsigned long stateChangeTime = 0;
 
 void loop() {
 

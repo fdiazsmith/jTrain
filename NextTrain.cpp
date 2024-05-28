@@ -1,5 +1,7 @@
 #include "NextTrain.h"
 
+extern UnixTime globalTimer; // Declare the global timer
+
 NextTrain::NextTrain(const char* server, String url) {
     this->server = server;
     this->url = url;
@@ -25,9 +27,9 @@ void NextTrain::request() {
                 if (unixTime != nullptr) {
                     delete unixTime;
                 }
-                currentTime = new UnixTime("America", "Los_Angeles");
+                globalTimer = UnixTime("America", "Los_Angeles");
                 unixTime = new UnixTime(timestamp);
-                unixTime->setRawOffset(currentTime->getRawOffset());
+                unixTime->setRawOffset(globalTimer.getRawOffset());
 
                 
             } else {
@@ -59,10 +61,9 @@ void NextTrain::request() {
 }
 
 void NextTrain::update() {
-    if (currentTime != nullptr) {
-        // unixTime->update();
-        currentTime->update();
-    }
+    // update the global timer to closely track the current time
+    globalTimer.update();
+    
 }
 
 int NextTrain::getTimeToNextOne() {

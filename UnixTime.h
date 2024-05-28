@@ -10,6 +10,12 @@ private:
     int64_t timestamp; // Unix timestamp in seconds
     long dstoffset;
     long rawOffset;
+    int year;
+    int month;
+    int day;
+    int hour;
+    int minute;
+    int second;
 
     bool fetchTimeFromAPI(const String& continent, const String& city);
 
