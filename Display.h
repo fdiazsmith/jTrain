@@ -5,6 +5,11 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_NeoMatrix.h>
 #include <Adafruit_NeoPixel.h>
+#include "UnixTime.h"
+
+
+extern UnixTime globalTimer; // Declare the global timer
+
 
 class Display {
 private:
@@ -12,7 +17,7 @@ private:
     const uint16_t colors[3];
     int x;
     int pass;
-
+    void checkTime();
 public:
     Display(int width, int height, int pin, int matrixType, int pixelType);
     void begin();
