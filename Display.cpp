@@ -16,8 +16,8 @@ void Display::begin() {
     x = matrix.width();
 }
 
-void Display::updateDisplay(const char* text) {
- 
+bool Display::updateDisplay(const char* text) {
+    
    matrix.fillScreen(0); // Clear the screen
 
     // Calculate text width only once when text changes
@@ -27,17 +27,19 @@ void Display::updateDisplay(const char* text) {
 
     matrix.setCursor(x, 0); // Set cursor position
     matrix.print(text); // Print the text
-    
+    bool textend = false;
     // Scroll text to the left
     x--; // Decrement x by 1
     if (x < -w) { // Check if x is less than -w
         x = matrix.width(); // Reset to start from the right again
         // at the end of each pass, check the time so we can adjust the brightness
         checkTime();
+        textend = true;
     } 
 
     matrix.show(); // Update the display
     delay(200); // Small delay to control scroll speed
+    return textend;
 }
 
 void Display::log(const char* message) {
@@ -61,6 +63,9 @@ float easeInOutQuad(float t) {
     return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
+void Display::setSpeed(int speed) {
+    this->speed = speed;
+}
 void Display::checkTime() {
     float decimalHour  = globalTimer.getHour()+globalTimer.getMinute()/60.0;
     float n;

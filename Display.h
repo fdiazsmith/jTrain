@@ -18,13 +18,15 @@ private:
     int x;
     int pass;
     void checkTime();
+    int speed;
 public:
     Display(int width, int height, int pin, int matrixType, int pixelType);
     void begin();
-    void updateDisplay(const char* text);
+    bool updateDisplay(const char* text);
     void log(const char* message);
     void networkStatus(bool status);
     void minutes(int minutes);
+    void setSpeed(int speed);
 };
 
 #endif
