@@ -7,14 +7,15 @@ Display::Display(int width, int height, int pin, int matrixType, int pixelType)
 void Display::begin() {
     matrix.begin();
     matrix.setTextWrap(false);
-    matrix.setBrightness(10);
+    matrix.setBrightness(1);
+    
     matrix.setTextColor(colors[0]);
     matrix.setTextSize(1);
     x = matrix.width();
 }
 
 void Display::updateDisplay(const char* text) {
-    
+ 
    matrix.fillScreen(0); // Clear the screen
 
     // Calculate text width only once when text changes
@@ -30,7 +31,7 @@ void Display::updateDisplay(const char* text) {
     if (x < -w) { // Check if x is less than -w
         x = matrix.width(); // Reset to start from the right again
         if (++pass >= 3) pass = 0;
-        matrix.setTextColor(colors[pass]); // Change color
+        matrix.setTextColor(colors[0]); // Change color
     }
 
     matrix.show(); // Update the display
